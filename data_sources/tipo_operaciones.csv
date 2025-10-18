@@ -1,0 +1,11 @@
+﻿id_tipo_operacion;no_tipo_operacion
+1;Atención llamada
+2;Emisión llamada
+3;Emisión factura
+4;Pago factura
+5;Alta cliente
+6;Alta pedido
+7;Baja cliente
+8;Edición datos
+9;Cancelación pedido
+10;Entrega pedido
