@@ -1,0 +1,44 @@
+table t_ccpp
+	lineageTag: 34e6e54c-0870-4dd5-ad53-9ae96196707a
+
+	column c_postal
+		dataType: string
+		lineageTag: 3775834f-78d6-47be-bcdf-2de5955141a2
+		dataCategory: PostalCode
+		summarizeBy: none
+		sourceColumn: c_postal
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_provincia
+		dataType: int64
+		formatString: 0
+		lineageTag: 0ecd1871-db17-4914-8f19-969b7fe00f08
+		summarizeBy: sum
+		sourceColumn: id_provincia
+
+		annotation SummarizationSetBy = Automatic
+
+	column c_ine
+		dataType: int64
+		formatString: 0
+		lineageTag: 2aca4149-336c-4c90-a7f6-f9255d0469fa
+		summarizeBy: none
+		sourceColumn: c_ine
+
+		annotation SummarizationSetBy = Automatic
+
+	partition t_ccpp = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(Web.Contents("https://raw.githubusercontent.com/Npgr30/TR/refs/heads/main/data_sources/ccpp.csv"),[Delimiter=";", Columns=3, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Encabezados promovidos" = Table.PromoteHeaders(Origen, [PromoteAllScalars=true]),
+				    #"Tipo cambiado" = Table.TransformColumnTypes(#"Encabezados promovidos",{{"c_postal", type text}, {"id_provincia", Int64.Type}, {"c_ine", Int64.Type}})
+				in
+				    #"Tipo cambiado"
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

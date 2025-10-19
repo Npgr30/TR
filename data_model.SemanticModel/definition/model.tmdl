@@ -1,0 +1,30 @@
+model Model
+	culture: es-ES
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: es-ES
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_ProTooling = ["TMDLView_Desktop","DevMode"]
+
+annotation PBI_QueryOrder = ["t_ccaa","t_provincias","t_municipios","t_ccpp","t_tipo_operaciones","t_usuarios","t_operaciones","cp_clientes","Medidas"]
+
+ref table t_fechas
+ref table t_reloj
+ref table t_ccaa
+ref table t_provincias
+ref table t_municipios
+ref table t_ccpp
+ref table t_tipo_operaciones
+ref table t_usuarios
+ref table t_operaciones
+ref table cp_clientes
+ref table Parámetro_numerico
+ref table Parámetro_dimensiones
+ref table Medidas
+
+ref cultureInfo es-ES
+

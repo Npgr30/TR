@@ -1,0 +1,44 @@
+table t_provincias
+	lineageTag: f74ef15b-c203-433b-a5b7-2b99b0b4f69d
+
+	column id_provincia
+		dataType: int64
+		formatString: 0
+		lineageTag: 3b0d7a3d-0c7f-42f9-8b30-80e5bef0c659
+		summarizeBy: none
+		sourceColumn: id_provincia
+
+		annotation SummarizationSetBy = Automatic
+
+	column no_provincia
+		dataType: string
+		lineageTag: b4aa3592-44e1-403b-b0c9-6698e0031ac1
+		dataCategory: StateOrProvince
+		summarizeBy: none
+		sourceColumn: no_provincia
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_comaut
+		dataType: int64
+		formatString: 0
+		lineageTag: 20922928-f5ba-46c8-b6e8-7c13a2349b7b
+		summarizeBy: none
+		sourceColumn: id_comaut
+
+		annotation SummarizationSetBy = Automatic
+
+	partition t_provincias = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(Web.Contents("https://raw.githubusercontent.com/Npgr30/TR/refs/heads/main/data_sources/provincias.csv"),[Delimiter=";", Columns=3, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Encabezados promovidos" = Table.PromoteHeaders(Origen, [PromoteAllScalars=true]),
+				    #"Tipo cambiado" = Table.TransformColumnTypes(#"Encabezados promovidos",{{"id_provincia", Int64.Type}, {"no_provincia", type text}, {"id_comaut", Int64.Type}})
+				in
+				    #"Tipo cambiado"
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

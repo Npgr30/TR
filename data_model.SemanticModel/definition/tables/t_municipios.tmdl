@@ -1,0 +1,132 @@
+table t_municipios
+	lineageTag: 951dbf72-b968-4972-82b3-c9918c779146
+
+	column c_ine
+		dataType: int64
+		formatString: 0
+		lineageTag: 0d4b632f-1221-4d49-9df2-dedb2c9c1ec2
+		summarizeBy: none
+		sourceColumn: c_ine
+
+		annotation SummarizationSetBy = Automatic
+
+	column no_municipio
+		dataType: string
+		lineageTag: 24bcc743-a10e-468b-ad87-869762d1ab46
+		dataCategory: City
+		summarizeBy: none
+		sourceColumn: no_municipio
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_provincia
+		dataType: int64
+		formatString: 0
+		lineageTag: 613680b5-73fd-42cc-bbd2-cfdf834d010e
+		summarizeBy: none
+		sourceColumn: id_provincia
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_capital_prov
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 823e5d9d-39f9-433f-9131-bb9d51656365
+		summarizeBy: none
+		sourceColumn: is_capital_prov
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_capital_comaut
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: e0f2564b-b20b-420d-84d5-5fb8d43ac1ff
+		summarizeBy: none
+		sourceColumn: is_capital_comaut
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column nu_poblacion
+		dataType: int64
+		formatString: 0
+		lineageTag: 98d9b820-7b1c-4031-a106-8e7125a300f9
+		summarizeBy: sum
+		sourceColumn: nu_poblacion
+
+		annotation SummarizationSetBy = Automatic
+
+	column geo_latitude_etrs89
+		dataType: double
+		lineageTag: 264eadb1-cdbc-4603-950b-aa76c09456ae
+		dataCategory: Latitude
+		summarizeBy: none
+		sourceColumn: geo_latitude_etrs89
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column geo_longitude_etrs89
+		dataType: double
+		lineageTag: 8965fe89-d6dc-403e-8bc9-3317e819bd97
+		dataCategory: Longitude
+		summarizeBy: sum
+		sourceColumn: geo_longitude_etrs89
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column geo_altura
+		dataType: int64
+		formatString: 0
+		lineageTag: 2816bffa-3e55-4dc5-adbc-615e722a07cf
+		summarizeBy: sum
+		sourceColumn: geo_altura
+
+		annotation SummarizationSetBy = Automatic
+
+	column geo_superficie
+		dataType: int64
+		formatString: 0
+		lineageTag: 77797b3d-1ce5-4c92-b945-b3da49df2bc5
+		summarizeBy: sum
+		sourceColumn: geo_superficie
+
+		annotation SummarizationSetBy = Automatic
+
+	column geo_perimetro
+		dataType: int64
+		formatString: 0
+		lineageTag: ac836070-f6ab-446f-a9f8-235e8a622d13
+		summarizeBy: sum
+		sourceColumn: geo_perimetro
+
+		annotation SummarizationSetBy = Automatic
+
+	column geo_hoja_etrs89
+		dataType: string
+		lineageTag: ca62c3db-5152-45c9-999f-df5b7dd0e34f
+		summarizeBy: none
+		sourceColumn: geo_hoja_etrs89
+
+		annotation SummarizationSetBy = Automatic
+
+	partition t_municipios = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(Web.Contents("https://raw.githubusercontent.com/Npgr30/TR/refs/heads/main/data_sources/municipios.csv"),[Delimiter=";", Columns=12, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Encabezados promovidos" = Table.PromoteHeaders(Origen, [PromoteAllScalars=true]),
+				    #"Tipo cambiado" = Table.TransformColumnTypes(#"Encabezados promovidos",{{"c_ine", Int64.Type}, {"no_municipio", type text}, {"id_provincia", Int64.Type}, {"is_capital_prov", Int64.Type}, {"is_capital_comaut", Int64.Type}, {"nu_poblacion", Int64.Type}, {"geo_latitude_etrs89", type number}, {"geo_longitude_etrs89", type number}, {"geo_altura", Int64.Type}, {"geo_superficie", Int64.Type}, {"geo_perimetro", Int64.Type}, {"geo_hoja_etrs89", type text}})
+				in
+				    #"Tipo cambiado"
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

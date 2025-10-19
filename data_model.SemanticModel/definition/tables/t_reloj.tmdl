@@ -1,0 +1,119 @@
+table t_reloj
+	lineageTag: 790fb12d-8485-4dfc-a434-63310643d215
+
+	column id_minuto
+		formatString: 0
+		lineageTag: bb5a2f90-190d-4be5-9fc6-82502df903d7
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [id_minuto]
+
+		annotation SummarizationSetBy = Automatic
+
+	column min
+		formatString: 0
+		lineageTag: 4c9a0fb2-1f3f-47de-a4a4-25b17645cf58
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [min]
+
+		annotation SummarizationSetBy = Automatic
+
+	column hora
+		formatString: 0
+		lineageTag: 62d877d1-5679-4048-ae3b-282bf150fd65
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [hora]
+
+		annotation SummarizationSetBy = Automatic
+
+	column time
+		dataType: dateTime
+		formatString: h:nn
+		lineageTag: 115e6d5c-6286-4d49-93bb-e7dee57303a9
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [time]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column lapso_hora
+		lineageTag: 570fe715-cb92-446b-a9c4-318deed4b00a
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [lapso_hora]
+
+		annotation SummarizationSetBy = Automatic
+
+	column lapso_media
+		lineageTag: f6da14f9-4b56-43d1-8d3e-fd537ae6fdcd
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [lapso_media]
+
+		annotation SummarizationSetBy = Automatic
+
+	column lapso_cuarto
+		lineageTag: 55dcf405-cd75-4f21-bc84-54cc25026036
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [lapso_cuarto]
+
+		annotation SummarizationSetBy = Automatic
+
+	column orden_media
+		formatString: 0
+		lineageTag: 53b77d7f-37ea-4da3-b62e-3c9332e41967
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [orden_media]
+
+		annotation SummarizationSetBy = Automatic
+
+	column orden_cuarto
+		formatString: 0
+		lineageTag: cbbdbc0e-1f96-4fe9-a306-048f5b4d32d7
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [orden_cuarto]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition t_reloj = calculated
+		mode: import
+		source = ```
+				
+				 VAR mins = GENERATESERIES(0,1439,1)
+				 VAR reloj = 
+				    SELECTCOLUMNS(mins,
+				        "id_minuto", [Value]
+				        ,"min", MOD([Value],60)
+				        ,"hora", QUOTIENT([Value],60)
+				    )
+				VAR reloj_ampliado =
+				    ADDCOLUMNS(reloj,
+				        "time", FORMAT([hora],"0")&":"&FORMAT([min],"00")
+				        ,"lapso_hora", FORMAT([hora],"0")&":00 - "&FORMAT(IF([hora]=23,-1,[hora])+1,"0")&":00"
+				        ,"lapso_media",IF( [min] < 30,FORMAT([hora],"0")&":00 - "&FORMAT([hora],"0")&":29",FORMAT([hora],"0")&":30 - "&FORMAT([hora],"0")&":59")
+				        ,"orden_media",IF( [min] < 30, [hora]*100, [hora]*100 + 30)
+				        ,"lapso_cuarto",SWITCH(TRUE()
+				                , [min] < 15                ,FORMAT([hora],"0")&":00 - "&FORMAT([hora],"0")&":14"
+				                , [min] >= 15 && [min] < 30 ,FORMAT([hora],"0")&":15 - "&FORMAT([hora],"0")&":29"
+				                , [min] >= 30 && [min] < 45 ,FORMAT([hora],"0")&":30 - "&FORMAT([hora],"0")&":44"
+				                ,                            FORMAT([hora],"0")&":45 - "&FORMAT([hora],"0")&":59")
+				        ,"orden_cuarto",SWITCH(TRUE()
+				                , [min] < 15                ,[hora]*100
+				                , [min] >= 15 && [min] < 30 ,[hora]*100 + 15
+				                , [min] >= 30 && [min] < 45 ,[hora]*100 + 30
+				                ,                            [hora]*100 + 45)
+				    )
+				RETURN reloj_ampliado
+				```
+
+	annotation PBI_Id = 450395a9ff394c369cb91f1cd319d308
+

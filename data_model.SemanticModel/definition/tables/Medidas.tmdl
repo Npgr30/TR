@@ -1,0 +1,26 @@
+table Medidas
+	lineageTag: 6e6c5411-ea9c-41e2-af39-ef6526fd63f1
+
+	measure 'Recuento de operaciones' = ```
+			
+			    CALCULATE(
+			        COUNT(t_operaciones[id_tipo_operacion])
+			        ,USERELATIONSHIP(t_fechas[Fecha],t_operaciones[f_inicio])
+			        ,USERELATIONSHIP(t_reloj[time],t_operaciones[time_inicio])
+			    )
+			```
+		formatString: 0
+		lineageTag: 16dd78f2-f0e5-47f9-96b4-22597fb93f2b
+
+	partition Medidas = m
+		mode: import
+		source =
+				let
+				    Origen = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Columna1 = _t]),
+				    #"Tipo cambiado" = Table.TransformColumnTypes(Origen,{{"Columna1", type text}}),
+				    #"Columnas quitadas" = Table.RemoveColumns(#"Tipo cambiado",{"Columna1"})
+				in
+				    #"Columnas quitadas"
+
+	annotation PBI_ResultType = Table
+

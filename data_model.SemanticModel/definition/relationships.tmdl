@@ -1,0 +1,55 @@
+relationship AutoDetected_9b35cf74-cde2-4ce9-a869-23998ca2dcd5
+	fromColumn: t_provincias.id_comaut
+	toColumn: t_ccaa.id_comaut
+
+relationship AutoDetected_f756dbe7-901c-4cfd-b0ad-2bb363ac9d4b
+	fromColumn: t_municipios.id_provincia
+	toColumn: t_provincias.id_provincia
+
+relationship AutoDetected_37f416b4-6e13-428e-88e9-5d8e087a5c65
+	isActive: false
+	fromColumn: t_ccpp.id_provincia
+	toColumn: t_provincias.id_provincia
+
+relationship AutoDetected_5d3791a4-a009-4ba5-ac38-25e9e5a7a060
+	fromColumn: t_ccpp.c_ine
+	toColumn: t_municipios.c_ine
+
+relationship AutoDetected_5e990b35-5b97-4728-b6aa-13477ae63c19
+	fromColumn: t_operaciones.id_tipo_operacion
+	toColumn: t_tipo_operaciones.id_tipo_operacion
+
+relationship AutoDetected_16f93d34-d09f-46fa-836a-a1f575295c98
+	fromColumn: t_operaciones.id_usuario
+	toColumn: t_usuarios.id_usuario
+
+relationship AutoDetected_f5712cb9-bfa1-46b5-b3a8-b6e71441bb73
+	fromColumn: t_operaciones.id_cliente
+	toColumn: cp_clientes.id_cliente
+
+relationship b0f18035-8bd3-9736-1211-a306a7474e08
+	crossFilteringBehavior: bothDirections
+	toCardinality: many
+	fromColumn: t_ccpp.c_postal
+	toColumn: cp_clientes.c_postal
+
+relationship 36784a8e-6cee-4ab6-a5e5-a51898989060
+	isActive: false
+	fromColumn: t_operaciones.f_fin
+	toColumn: t_fechas.Fecha
+
+relationship 5bd11238-f767-786b-4507-3063b11ad1d6
+	isActive: false
+	fromColumn: t_operaciones.f_inicio
+	toColumn: t_fechas.Fecha
+
+relationship bb66458c-2032-9941-d40e-b1ac1bec7ecc
+	isActive: false
+	fromColumn: t_operaciones.tiem_fin
+	toColumn: t_reloj.time
+
+relationship e9b2490c-028f-7b92-33ce-1caff67567cc
+	isActive: false
+	fromColumn: t_operaciones.time_inicio
+	toColumn: t_reloj.time
+

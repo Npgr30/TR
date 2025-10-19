@@ -1,0 +1,102 @@
+{
+  "name": "Tema valido para matriz",
+  "visualStyles": {
+    "pivotTable": {
+      "*": {
+        "values": [
+          {
+            "fontColor": {
+              "solid": {
+                "color": "#000000"
+              }
+            },
+            "fontSize": 12,
+            "fontFamily": "Segoe UI",
+            "fontWeight": "normal"
+          }
+        ],
+        "columnHeaders": [
+          {
+            "fontColor": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            },
+            "fontSize": 15,
+            "fontFamily": "Segoe UI",
+            "fontWeight": "bold",
+            "wordWrap": true,
+            "alignment": "Center",
+            "urlIcon": true,
+            "autoSizeColumnWidth": true,
+            "outline": "BottomOnly",
+            "outlineColor": {
+              "solid": {
+                "color": "#CCCCCC"
+              }
+            },
+            "outlineWeight": 1
+          }
+        ],
+        "rowHeaders": [
+          {
+            "fontColor": {
+              "solid": {
+                "color": "#000000"
+              }
+            },
+            "fontSize": 12,
+            "fontFamily": "Segoe UI"
+          }
+        ],
+        "subTotals": [
+          {
+            "fontColor": {
+              "solid": {
+                "color": "#ED7D31"
+              }
+            },
+            "fontSize": 12,
+            "fontFamily": "Segoe UI"
+          }
+        ],
+        "grandTotals": [
+          {
+            "fontColor": {
+              "solid": {
+                "color": "#70AD47"
+              }
+            },
+            "fontSize": 13,
+            "fontFamily": "Segoe UI"
+          }
+        ],
+        "title": [
+          {
+            "show": true,
+            "fontColor": {
+              "solid": {
+                "color": "#000000"
+              }
+            },
+            "fontSize": 14,
+            "fontFamily": "Segoe UI",
+            "fontWeight": "bold"
+          }
+        ],
+        "grid": [
+          {
+            "outlineColor": {
+              "solid": {
+                "color": "#CCCCCC"
+              }
+            },
+            "outlineWeight": 1
+          }
+        ]
+      }
+    }
+  },
+  "backgroundLight": "#AABFED",
+  "background": "#91D6F6"
+}

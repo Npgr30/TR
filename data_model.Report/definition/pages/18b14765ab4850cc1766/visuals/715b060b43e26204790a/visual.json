@@ -1,0 +1,91 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.3.0/schema.json",
+  "name": "715b060b43e26204790a",
+  "position": {
+    "x": 16.666666666666668,
+    "y": 197.77777777777777,
+    "z": 0,
+    "height": 410,
+    "width": 1263.3333333333333
+  },
+  "visual": {
+    "visualType": "clusteredBarChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "t_tipo_operaciones"
+                    }
+                  },
+                  "Property": "no_tipo_operacion"
+                }
+              },
+              "queryRef": "t_tipo_operaciones.no_tipo_operacion",
+              "nativeQueryRef": "Tipo de operación",
+              "active": true,
+              "displayName": "Tipo de operación"
+            }
+          ],
+          "fieldParameters": [
+            {
+              "parameterExpr": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Parámetro_dimensiones"
+                    }
+                  },
+                  "Property": "Parámetro_dimensiones"
+                }
+              },
+              "index": 0,
+              "length": 1
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas"
+                    }
+                  },
+                  "Property": "Recuento de operaciones"
+                }
+              },
+              "queryRef": "Medidas.Recuento de operaciones",
+              "nativeQueryRef": "Recuento de operaciones"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Medidas"
+                  }
+                },
+                "Property": "Recuento de operaciones"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -1,0 +1,34 @@
+table t_usuarios
+	lineageTag: 4c7d96f3-7b3e-443b-81ca-6c03d6cde0ea
+
+	column id_usuario
+		dataType: int64
+		formatString: 0
+		lineageTag: 70e5b309-2a69-440a-8b50-14bf55f80899
+		summarizeBy: none
+		sourceColumn: id_usuario
+
+		annotation SummarizationSetBy = Automatic
+
+	column no_usuario
+		dataType: string
+		lineageTag: dd62d89b-0063-4cbd-b689-727791ca5a68
+		summarizeBy: none
+		sourceColumn: no_usuario
+
+		annotation SummarizationSetBy = Automatic
+
+	partition t_usuarios = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(Web.Contents("https://raw.githubusercontent.com/Npgr30/TR/refs/heads/main/data_sources/usuarios.csv"),[Delimiter=";", Columns=2, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Encabezados promovidos" = Table.PromoteHeaders(Origen, [PromoteAllScalars=true]),
+				    #"Tipo cambiado" = Table.TransformColumnTypes(#"Encabezados promovidos",{{"id_usuario", Int64.Type}, {"no_usuario", type text}})
+				in
+				    #"Tipo cambiado"
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

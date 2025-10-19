@@ -1,0 +1,34 @@
+table t_tipo_operaciones
+	lineageTag: d76d0c72-f49c-4a39-9f0a-80a9c758a63b
+
+	column id_tipo_operacion
+		dataType: int64
+		formatString: 0
+		lineageTag: 79fe596a-0aec-492b-8bf6-221b3b831697
+		summarizeBy: none
+		sourceColumn: id_tipo_operacion
+
+		annotation SummarizationSetBy = Automatic
+
+	column no_tipo_operacion
+		dataType: string
+		lineageTag: 5c9ce072-3154-4dff-921c-37ed23a4ba7d
+		summarizeBy: none
+		sourceColumn: no_tipo_operacion
+
+		annotation SummarizationSetBy = Automatic
+
+	partition t_tipo_operaciones = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(Web.Contents("https://raw.githubusercontent.com/Npgr30/TR/refs/heads/main/data_sources/tipo_operaciones.csv"),[Delimiter=";", Columns=2, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Encabezados promovidos" = Table.PromoteHeaders(Origen, [PromoteAllScalars=true]),
+				    #"Tipo cambiado" = Table.TransformColumnTypes(#"Encabezados promovidos",{{"id_tipo_operacion", Int64.Type}, {"no_tipo_operacion", type text}})
+				in
+				    #"Tipo cambiado"
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

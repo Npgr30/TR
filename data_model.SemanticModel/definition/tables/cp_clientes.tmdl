@@ -1,0 +1,34 @@
+table cp_clientes
+	lineageTag: aa3e4196-9261-470e-8ad3-227246444bd9
+
+	column id_cliente
+		dataType: string
+		lineageTag: 3a41cf72-f586-4832-96d5-6dbd49f33fea
+		summarizeBy: none
+		sourceColumn: id_cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column c_postal
+		dataType: string
+		lineageTag: b22994ed-aa53-4e1c-b751-14de101d4f1b
+		dataCategory: PostalCode
+		summarizeBy: none
+		sourceColumn: c_postal
+
+		annotation SummarizationSetBy = Automatic
+
+	partition cp_clientes = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(Web.Contents("https://raw.githubusercontent.com/Npgr30/TR/refs/heads/main/data_sources/cp_clientes.csv"),[Delimiter=";", Columns=4, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Columnas quitadas" = Table.RemoveColumns(Origen,{"Column3", "Column4"}),
+				    #"Encabezados promovidos" = Table.PromoteHeaders(#"Columnas quitadas", [PromoteAllScalars=true])
+				in
+				    #"Encabezados promovidos"
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

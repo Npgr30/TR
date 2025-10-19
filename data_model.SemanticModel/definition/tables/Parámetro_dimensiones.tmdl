@@ -1,0 +1,61 @@
+table Parámetro_dimensiones
+	lineageTag: 51acb616-a405-44ee-9289-0681fdc797ed
+
+	column Parámetro_dimensiones
+		lineageTag: 950719e9-27f2-4df3-aa5c-dcd233715b64
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Parámetro_dimensiones Orden'
+
+		relatedColumnDetails
+			groupByColumn: 'Parámetro_dimensiones Campos'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parámetro_dimensiones Campos'
+		isHidden
+		lineageTag: c8054798-3e1d-45f4-ac9a-cb2e38c58f3c
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Parámetro_dimensiones Orden'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parámetro_dimensiones Orden'
+		isHidden
+		formatString: 0
+		lineageTag: acd231f3-dc6d-4f6d-8cf6-54999d438bf3
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Parámetro_dimensiones = calculated
+		mode: import
+		source =
+				{
+				    ("Código postal", NAMEOF('t_ccpp'[c_postal]), 0),
+				    ("Municipio", NAMEOF('t_municipios'[no_municipio]), 1),
+				    ("Provincia", NAMEOF('t_provincias'[no_provincia]), 2),
+				    ("Comunidad Autónoma", NAMEOF('t_ccaa'[no_comaut]), 3),
+				    ("Tipo de operación", NAMEOF('t_tipo_operaciones'[no_tipo_operacion]), 4),
+				    ("Nombre usuario", NAMEOF('t_usuarios'[no_usuario]), 5),
+				    ("Año", NAMEOF('t_fechas'[Año]), 6),
+				    ("Mes", NAMEOF('t_fechas'[Mes año]), 7),
+				    ("Semana", NAMEOF('t_fechas'[Sem  año]), 8),
+				    ("Día del mes", NAMEOF('t_fechas'[Dia]), 9),
+				    ("Día de la semana", NAMEOF('t_fechas'[Nombre dia]), 10),
+				    ("Fecha", NAMEOF('t_fechas'[Fecha]), 11),
+				    ("Lapso hora", NAMEOF('t_reloj'[lapso_hora]), 12),
+				    ("Lapso media hora", NAMEOF('t_reloj'[lapso_media]), 13),
+				    ("Lapso cuarto hora", NAMEOF('t_reloj'[lapso_cuarto]), 14)
+				}
+
+	annotation PBI_Id = 0ea46af923ed4317ab6837b8b39f2ca5
+

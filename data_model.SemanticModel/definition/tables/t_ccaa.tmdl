@@ -1,0 +1,35 @@
+table t_ccaa
+	lineageTag: 33b55b00-90b4-43d4-bf2a-fc309aeecb7b
+
+	column id_comaut
+		dataType: int64
+		formatString: 0
+		lineageTag: f48116c4-5dc1-434a-9422-06cfd54d03ef
+		summarizeBy: none
+		sourceColumn: id_comaut
+
+		annotation SummarizationSetBy = Automatic
+
+	column no_comaut
+		dataType: string
+		lineageTag: 2590d40f-b58e-4395-9058-d668f995e786
+		dataCategory: Country
+		summarizeBy: none
+		sourceColumn: no_comaut
+
+		annotation SummarizationSetBy = Automatic
+
+	partition t_ccaa = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(Web.Contents("https://raw.githubusercontent.com/Npgr30/TR/refs/heads/main/data_sources/ccaa.csv"),[Delimiter=";", Columns=2, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Encabezados promovidos" = Table.PromoteHeaders(Origen, [PromoteAllScalars=true]),
+				    #"Tipo cambiado" = Table.TransformColumnTypes(#"Encabezados promovidos",{{"id_comaut", Int64.Type}, {"no_comaut", type text}})
+				in
+				    #"Tipo cambiado"
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

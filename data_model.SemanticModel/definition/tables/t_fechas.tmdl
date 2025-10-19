@@ -1,0 +1,281 @@
+table t_fechas
+	lineageTag: 527ce180-c998-4f7f-8d6e-588677b1e222
+
+	column Fecha
+		formatString: dd/mm/yyyy
+		lineageTag: 03a7b716-d316-4d15-8d2b-94d0a3fd8d9e
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Fecha]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column Año
+		formatString: 0
+		lineageTag: 1510ec1e-5ca8-4f48-9891-77e490a09725
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Año]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Mes
+		formatString: 0
+		lineageTag: b6e9f1cb-6c49-4240-994c-f0d35f5d2ec6
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Mes]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nombre mes'
+		lineageTag: 9a3c56ab-12cb-406b-86a2-c18ec3e0ae03
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Nombre mes]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nº Sem'
+		formatString: 0
+		lineageTag: eb0d3966-566b-474c-b750-6df2da672f81
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Nº Sem]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Semana
+		lineageTag: a60a5abc-8d7f-47fe-a71c-d45c87a7eab2
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Semana]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Dia
+		formatString: 0
+		lineageTag: eb47af1a-2d1d-485d-9522-234c61d138b7
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Dia]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Dia año'
+		formatString: 0
+		lineageTag: f55c43f5-9045-4d1c-8881-cbd979017b41
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Dia año]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Dia semana'
+		formatString: 0
+		lineageTag: a71539e7-c068-4c6d-b521-3908f610378e
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Dia semana]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nombre dia'
+		lineageTag: 8b2fc5d5-0fa1-4652-bc4f-3fa395b9aa6b
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Nombre dia]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Trimestre
+		formatString: 0
+		lineageTag: 308e7909-eb47-4c97-a5bf-312067b6fc85
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Trimestre]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Mes año'
+		lineageTag: 59248fe2-8480-4802-8e3a-6c72f2bdab69
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Mes año]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sem  año'
+		lineageTag: 56a32d04-0e5e-4e97-87a4-c019d91dd6cf
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Sem  año]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fin de semana'
+		formatString: 0
+		lineageTag: 47233dba-8b55-43e2-97ad-6f1e067f9982
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Fin de semana]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'id dia'
+		formatString: 0
+		lineageTag: 17f5cd1c-5fa9-4b4b-8bf6-c9aa6a5bf31b
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [id dia]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'id mes'
+		formatString: 0
+		lineageTag: 872798b9-c318-4a32-8c9c-fc86330c02fb
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [id mes]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'id sem'
+		formatString: 0
+		lineageTag: 76d8d394-dcc7-41fc-ae6b-cb95e4e60fe2
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [id sem]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Presente
+		formatString: 0
+		lineageTag: 643ce09c-672a-49ee-8fdf-495373bf0a24
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Presente]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 0_hoy
+		lineageTag: f6c893b7-699c-4737-8546-ad5e4ff13900
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [0_hoy]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column mes_corriente
+		lineageTag: bf53b7ff-759e-43fb-b8d2-214c246a7466
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [mes_corriente]
+
+		annotation SummarizationSetBy = Automatic
+
+	column ult_30_dias
+		lineageTag: 7144e215-d14e-41e1-9175-c8b20dc5d45b
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [ult_30_dias]
+
+		annotation SummarizationSetBy = Automatic
+
+	column ult_90_dias
+		lineageTag: 65848dd9-1a1c-49c2-bafc-c6ebdb3536f0
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [ult_90_dias]
+
+		annotation SummarizationSetBy = Automatic
+
+	column ult_15_dias
+		lineageTag: 98dd1ab7-c4be-4f48-a9b1-aa0362d0079f
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [ult_15_dias]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 0_sem_act
+		lineageTag: a4fd0c9e-c89c-4b54-bc43-a4bc0df31594
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [0_sem_act]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column nom_retrosem
+		lineageTag: 6657024f-2fa1-4d32-9dda-c3c5a8c1f941
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [nom_retrosem]
+
+		annotation SummarizationSetBy = Automatic
+
+	column nom_retrodia
+		lineageTag: 510d0e5f-6722-4732-8072-33361438ec1e
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [nom_retrodia]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition t_fechas = calculated
+		mode: import
+		source = ```
+				
+				    VAR Tablafechas =
+				            CALENDAR(
+				                Date(2000,1,1),
+				                //Date(   Year(TODAY()),  MONTH(TODAY()), DAY( EOMONTH(TODAY(),0) ) ) // <-- untill last day of current month
+				                Date(2099,12,31) // <-- all century XXI
+				                )
+				    VAR Calendario = 
+				        SELECTCOLUMNS(
+				            Tablafechas,
+				            	"Fecha", [Date]
+				            	,"Año", YEAR([Date])
+				            	,"Mes", MONTH([Date])
+						        ,"Nombre mes", FORMAT([Date], "MMMM")
+				                ,"Nº Sem", WEEKNUM([Date], 2)
+				            	,"Semana", "Sem "&WEEKNUM([Date], 2)
+				            	,"Dia", DAY([Date])
+					    	    ,"Dia año", DATEDIFF(DATE(YEAR([Date]),1,1), [Date], DAY) + 1
+				            	,"Dia semana", WEEKDAY([Date],2)
+				            	,"Nombre dia", FORMAT([Date], "DDDD")
+				            	,"Trimestre", QUARTER([Date])
+				            	,"Mes año", FORMAT([Date], "MMMM yy")
+				                ,"Sem  año","Sem "&WEEKNUM([Date], 2) &" ("& YEAR([Date])&")"
+				                ,"Fin de semana", if(WEEKDAY([Date],2)=7 || WEEKDAY([Date],2)=6,1,0)
+				                ,"id dia", YEAR([Date])*10000+MONTH([Date])*100+DAY([Date])
+				                ,"id mes", YEAR([Date])*100+MONTH([Date])
+				                ,"id sem", YEAR([Date])*100+WEEKNUM([Date], 2)
+				                ,"Presente",if([Date]<=TODAY(),1,0)
+				                ,"0_hoy", VALUE(FORMAT([Date] - TODAY(),"0"))
+				                ,"mes_corriente", if(and(MONTH([date]) = MONTH(TODAY()),YEAR([date]) = YEAR(TODAY())), "MES ACTUAL", BLANK())
+				                ,"ult_30_dias", IF([Date]> TODAY() - 30 && [Date]<= TODAY(), "Últimos 30 días", BLANK())
+				                ,"ult_90_dias", IF([Date]> TODAY() - 90 && [Date]<= TODAY(), "Últimos 90 días", BLANK())
+				                ,"ult_15_dias", IF([Date]> TODAY() - 15 && [Date]<= TODAY(), "Últimos 15 días", BLANK())
+				                ,"0_sem_act", (-1)*(DATEDIFF(DATE(2024,4,1)-WEEKDAY(DATE(2024,4,1),2) + 1 , TODAY() - WEEKDAY(TODAY(),2) + 1, DAY)/7 + 1) - (DATEDIFF([Date] - WEEKDAY([Date],2) + 1,DATE(2024,4,1)-WEEKDAY(DATE(2024,4,1),2) + 1, DAY)/7 - 1)
+				                )
+				    VAR Calendario_plus = 
+				        ADDCOLUMNS(
+				            Calendario,
+				            "nom_retrosem",if([0_sem_act] = 0, "Sem Actual", "Sem "&[0_sem_act])
+				            ,"nom_retrodia",SWITCH(TRUE(),[0_hoy] = 0, "Hoy",    [0_hoy]<0, "Hace "& [0_hoy]*(-1) &" días",  "Dentro de "& [0_hoy] &" días")
+				            )
+				    RETURN Calendario_plus
+				```
+
+	annotation PBI_Id = 716b42192eaa4a3399f3fed86ed28d49
+

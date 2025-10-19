@@ -1,0 +1,99 @@
+table t_operaciones
+	lineageTag: e514b5a1-2971-4ef0-a6f1-8da6754c50ba
+
+	column id_tipo_operacion
+		dataType: int64
+		formatString: 0
+		lineageTag: 2fb66278-7c6d-438e-a364-cd04f2e97912
+		summarizeBy: none
+		sourceColumn: id_tipo_operacion
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_usuario
+		dataType: int64
+		formatString: 0
+		lineageTag: 5ed7578d-0774-4c13-b95a-fb0fe64edf28
+		summarizeBy: none
+		sourceColumn: id_usuario
+
+		annotation SummarizationSetBy = Automatic
+
+	column f_inicio
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: a6550680-28f0-4bfa-afb3-e274d3705c49
+		summarizeBy: none
+		sourceColumn: f_inicio
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column f_fin
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: ab4e99ad-1a21-464a-b979-d7f357ce4a63
+		summarizeBy: none
+		sourceColumn: f_fin
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column id_cliente
+		dataType: string
+		lineageTag: 8e89802e-7b0f-4919-aa27-7227ec807931
+		summarizeBy: none
+		sourceColumn: id_cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column time_inicio
+		dataType: dateTime
+		formatString: h:nn
+		lineageTag: 7e5b626d-ad60-48bd-b210-63ae8093723d
+		summarizeBy: none
+		sourceColumn: time_inicio
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column tiem_fin
+		dataType: dateTime
+		formatString: h:nn
+		lineageTag: fbfc74c6-813f-4502-b022-271df2995dae
+		summarizeBy: none
+		sourceColumn: tiem_fin
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	partition t_operaciones = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(Web.Contents("https://raw.githubusercontent.com/Npgr30/TR/refs/heads/main/data_sources/operaciones.csv"),[Delimiter=";", Columns=5, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Encabezados promovidos" = Table.PromoteHeaders(Origen, [PromoteAllScalars=true]),
+				    #"Tipo cambiado" = Table.TransformColumnTypes(#"Encabezados promovidos",{{"id_tipo_operacion", Int64.Type}, {"id_usuario", Int64.Type}, {"f_inicio", type datetime}, {"f_fin", type datetime}, {"id_cliente", type text}}),
+				    #"Filas filtradas" = Table.SelectRows(#"Tipo cambiado", each ([id_cliente] <> "")),
+				    #"Texto insertado entre delimitadores" = Table.AddColumn(#"Filas filtradas", "time_inicio", each Text.BetweenDelimiters(Text.From([f_inicio], "es-ES"), " ", ":", 0, 1), type text),
+				    #"Texto insertado entre delimitadores2" = Table.AddColumn(#"Texto insertado entre delimitadores", "tiem_fin", each Text.BetweenDelimiters(Text.From([f_fin], "es-ES"), " ", ":", 0, 1), type text),
+				    #"Tipo cambiado1" = Table.TransformColumnTypes(#"Texto insertado entre delimitadores2",{{"f_inicio", type date}, {"f_fin", type date}, {"time_inicio", type time}, {"tiem_fin", type time}})
+				in
+				    #"Tipo cambiado1"
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+
